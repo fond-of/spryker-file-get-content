@@ -5,6 +5,7 @@ namespace FondOfSpryker\Yves\FileGetContent\Plugin\Provider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Spryker\Yves\Kernel\AbstractPlugin;
+use Twig_Environment;
 
 /**
  * @method \FondOfSpryker\Yves\FileGetContent\FileGetContentFactory getFactory()
@@ -25,7 +26,7 @@ class FileGetContentServiceProvider extends AbstractPlugin implements ServicePro
         $app['twig'] = $app->share(
             $app->extend(
                 'twig',
-                function (\Twig_Environment $twig) use ($twigExtension) {
+                function (Twig_Environment $twig) use ($twigExtension) {
                     $twig->addExtension($twigExtension);
 
                     return $twig;

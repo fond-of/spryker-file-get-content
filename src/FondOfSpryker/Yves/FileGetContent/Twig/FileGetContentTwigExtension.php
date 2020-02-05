@@ -2,12 +2,14 @@
 
 namespace FondOfSpryker\Yves\FileGetContent\Twig;
 
+use Exception;
 use Spryker\Shared\Twig\TwigExtension;
-use Symfony\Component\Filesystem\Filesystem;
+use Twig_Environment;
+use Twig_SimpleFunction;
 
 class FileGetContentTwigExtension extends TwigExtension
 {
-    const FILE_GET_CONTENT = 'fileGetContent';
+    public const FILE_GET_CONTENT = 'fileGetContent';
 
     /**
      * @return array
@@ -15,7 +17,7 @@ class FileGetContentTwigExtension extends TwigExtension
     public function getFunctions(): array
     {
         return [
-            $this->createFileGetContentFunction()
+            $this->createFileGetContentFunction(),
         ];
     }
 
@@ -24,7 +26,7 @@ class FileGetContentTwigExtension extends TwigExtension
      */
     protected function createFileGetContentFunction()
     {
-        return new \Twig_SimpleFunction(
+        return new Twig_SimpleFunction(
             static::FILE_GET_CONTENT,
             [$this, 'renderFileGetContent'],
             [
@@ -36,7 +38,8 @@ class FileGetContentTwigExtension extends TwigExtension
 
     /**
      * @param string $url
-     * @return null|string
+     *
+     * @return string|null
      */
     protected function checkValidURL(string $url): ?string
     {
@@ -55,15 +58,16 @@ class FileGetContentTwigExtension extends TwigExtension
 
     /**
      * @param array $params
+     *
      * @return string
      */
-    public function renderFileGetContent(\Twig_Environment $twig, $fileURL): string
+    public function renderFileGetContent(Twig_Environment $twig, $fileURL): string
     {
         $fileURL = $this->checkValidURL($fileURL);
 
         try {
             $response = @file_get_contents($fileURL);
-        } catch(\Exception $exception) {
+        } catch (Exception $exception) {
             $response = false;
         }
 
