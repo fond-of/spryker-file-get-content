@@ -57,8 +57,9 @@ class FileGetContentTwigExtension extends TwigExtension
     }
 
     /**
-     * @param array $params
-     *
+     * @param  \Twig_Environment  $twig
+     * @param $fileURL
+     * 
      * @return string
      */
     public function renderFileGetContent(Twig_Environment $twig, $fileURL): string
