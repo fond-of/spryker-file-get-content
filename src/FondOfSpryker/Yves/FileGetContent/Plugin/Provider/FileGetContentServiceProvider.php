@@ -8,6 +8,7 @@ use Spryker\Yves\Kernel\AbstractPlugin;
 use Twig_Environment;
 
 /**
+ * @deprecated Use {@link \FondOfSpryker\Yves\FileGetContent\Plugin\Twig\FileGetContentTwigPlugin} instead.
  * @method \FondOfSpryker\Yves\FileGetContent\FileGetContentFactory getFactory()
  */
 class FileGetContentServiceProvider extends AbstractPlugin implements ServiceProviderInterface
